@@ -3,7 +3,7 @@ function getList(page, pagelimit) {
     let res;
     $.ajax({
         type: "GET",
-        url: "https://81.68.107.245/api/songs?page=" + page + "&pageSize=" + pagelimit,
+        url: "https://mp3.zzgoodqc.cn/api/songs?page=" + page + "&pageSize=" + pagelimit,
         async: false,
         dataType: "json",
         success: function (data) {
@@ -17,7 +17,7 @@ function getListById(id) {
     let searchData;
     $.ajax({
         type: "GET",
-        url: "https://81.68.107.245/api/songs/" + id,
+        url: "https://mp3.zzgoodqc.cn/api/songs/" + id,
         dataType: "json",
         async: false,
         success: function (res) {
@@ -30,7 +30,7 @@ function getListById(id) {
 function del(id) {
     $.ajax({
         type: "DELETE",
-        url: "https://81.68.107.245/api/songs/" + id,
+        url: "https://mp3.zzgoodqc.cn/api/songs/" + id,
         dataType: "json",
         async: false,
         success: function (res) {
@@ -41,7 +41,7 @@ function del(id) {
 function add(res) {
     $.ajax({
         type: "POST",
-        url: "https://81.68.107.245/api/songs",
+        url: "https://mp3.zzgoodqc.cn/api/songs",
         dataType: "json",
         async: false,
         data: res,
@@ -64,7 +64,7 @@ function upd(res) {
     };
     $.ajax({
         type: "PUT",
-        url: "https://81.68.107.245/api/songs/" + res.id,
+        url: "https://mp3.zzgoodqc.cn/api/songs/" + res.id,
         dataType: "json",
         async: false,
         data: JSON.stringify(data),

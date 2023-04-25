@@ -1,0 +1,220 @@
+body {
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+#box {
+    height: 100%;
+}
+
+#box-left {
+    display: inline-block;
+    width: 200px;
+    height: 100%;
+    background-color: #3a3838;
+}
+
+#title-h1 {
+    width: 100%;
+}
+
+#box-left h1 {
+    text-align: center;
+    padding: 20px 0;
+    color: white;
+}
+
+#box-top {
+    position: absolute;
+    top: 0;
+    width: 1700px;
+    left: 200px;
+    height: 50px;
+    background-color: #333;
+}
+
+#box-top-zhuti {
+    position: absolute;
+    top: 15px;
+    right: 60px;
+}
+
+#box-top-zhuti svg {
+    position: absolute;
+    top: -5px;
+    right: 110px;
+}
+
+#svgMoon {
+    display: none;
+}
+
+#selectBackground {
+    font-size: 18px;
+}
+
+#box-middle {
+    position: absolute;
+    top: 130px;
+    left: 200px;
+}
+
+#add {
+    border: 0;
+    border-radius: 8px;
+    margin-left: 70px;
+    margin-bottom: 10px;
+    height: 40px;
+    background-color: green;
+    width: 80px;
+    color: white;
+    font-size: 16px;
+}
+
+#del {
+    border: 0;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    background-color: red;
+    width: 80px;
+    color: white;
+    font-size: 16px;
+}
+
+#searchInput {
+    border-radius: 8px;
+    margin-left: 320px;
+    height: 40px;
+    width: 500px;
+    border: 1px solid #ccc;
+}
+
+#searchBtn {
+    border: 0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    height: 40px;
+    background-color: blue;
+    width: 80px;
+    color: white;
+    font-size: 16px;
+}
+
+#box-middle-table {
+    width: 1720px;
+}
+
+#box-middle-table th {
+    height: 70px;
+    background-color: #efe9e9;
+    font-size: 18px;
+    border: 1px solid #ccc;
+}
+
+#box-middle-table td {
+    height: 60px;
+}
+
+#box-middle-table tr,
+td {
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#saveBox {
+    border: 1px solid#ccc;
+    background-color: rgb(128, 116, 116, 0.7);
+    width: 800px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -400px;
+    display: none;
+}
+
+#saveBox div {
+    margin-left: 90px;
+    margin-top: 40px;
+}
+
+#saveBox input {
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#title,
+#album {
+    margin-right: 110px;
+}
+
+#image_url {
+    margin-right: 230px;
+}
+
+#btnBox {
+    position: absolute;
+    left: 170px
+}
+
+#saveBtn {
+    border: 0;
+    border-radius: 8px;
+    width: 80px;
+    height: 40px;
+    margin-right: 100px;
+    background-color: rgb(226, 162, 173);
+}
+
+#celBtn {
+    border: 0;
+    border-radius: 8px;
+    width: 80px;
+    height: 40px;
+    margin-right: 100px;
+    background-color: #ccc;
+}
+
+button {
+    cursor: pointer;
+}
+
+.delBtn {
+    border: 0;
+    width: 50px;
+    height: 30px;
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+}
+
+.updBtn {
+    border: 0;
+    width: 50px;
+    height: 30px;
+    background-color: #c5bebe;
+    color: white;
+    border-radius: 8px;
+}
+
+.limitBtn {
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+}

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歌曲管理</title>
+    <!-- 引入css -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- 引入 layui.css -->
+    <link
+      rel="stylesheet"
+      href="http://unpkg.com/layui@2.6.8/dist/css/layui.css"
+    />
+    <link rel="stylesheet" type="text/css" href="upd.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <!-- 引入 layui.js -->
+    <script src="http://unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  </head>
+  <body>
+    <div id="box">
+      <div id="box-left">
+        <h1 id="title-h1">歌曲管理系统</h1>
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+          <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">首页</a>
+            <dl class="layui-nav-child">
+              <dd><a href="javascript:;" id="musicGL">歌曲管理</a></dd>
+            </dl>
+          </li>
+        </ul>
+      </div>
+      <div id="box-top">
+        <div id="box-top-zhuti">
+          <svg
+            id="svgMoon"
+            t="1682058677351"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="4388"
+            width="32"
+            height="32"
+          >
+            <path
+              d="M644.5056 70.528C834.4064 127.488 972.8 303.5648 972.8 512c0 254.4896-206.3104 460.8-460.8 460.8-222.4128 0-408.0128-157.568-451.2768-367.1296A433.4848 433.4848 0 0 0 230.4 640c240.3584 0 435.2-194.8416 435.2-435.2 0-44.2112-6.5792-86.8608-18.8416-127.0528z"
+              p-id="4389"
+              fill="#2c2c2c"
+            ></path>
+          </svg>
+          <svg
+            id="svgSun"
+            t="1682058541733"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="2973"
+            width="32"
+            height="32"
+          >
+            <path
+              d="M344.189719 297.542353l-57.889397-57.889397-48.231443 48.232466 57.889397 57.889397L344.189719 297.542353zM254.129654 480.812217l-96.462886 0L157.666768 545.103411l96.462886 0L254.129654 480.812217zM543.518311 162.503932l-64.291194 0 0 93.214915 64.291194 0L543.518311 162.503932zM784.677572 287.885422l-48.231443-48.232466-57.89042 57.889397 45.031568 45.027474L784.677572 287.885422zM678.555709 728.42137l57.89042 57.841302 45.07557-44.982449-57.934423-57.885304L678.555709 728.42137zM768.614751 545.103411l96.464932 0 0-64.291194-96.464932 0L768.614751 545.103411zM511.397785 320.009018c-106.116747 0-192.926795 86.855073-192.926795 192.927818 0 106.113677 86.810048 192.923725 192.926795 192.923725 106.11777 0 192.923725-86.810048 192.923725-192.923725C704.32151 406.864091 617.515555 320.009018 511.397785 320.009018M479.227117 863.459791l64.291194 0 0-93.259941-64.291194 0L479.227117 863.459791zM238.068879 738.030205l48.231443 48.231443 57.889397-57.841302-44.982449-45.027474L238.068879 738.030205z"
+              fill="#ffffff"
+              p-id="2974"
+            ></path>
+          </svg>
+          <select id="selectBackground" style="width: 100px">
+            <option value="0">浅色主题</option>
+            <option value="1">深色主题</option>
+          </select>
+        </div>
+      </div>
+      <div id="box-middle">
+        <div>
+          <button id="add">新增歌曲</button>
+          <button id="del">批量删除</button>
+          <input type="text" id="searchInput" placeholder="通过歌曲名称查询" />
+          <button id="searchBtn">查找</button>
+        </div>
+        <table id="box-middle-table">
+          <thead>
+            <tr>
+              <th style="width: 70px">
+                <input type="checkbox" id="checkAll" />
+              </th>
+              <th style="width: 80px">ID</th>
+              <th>图片</th>
+              <th>歌曲名称</th>
+              <th>艺术家</th>
+              <th>专辑名称</th>
+              <th>年代</th>
+              <th>类型</th>
+              <th style="width: 270px">操作</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="limitBox"></div>
+      </div>
+      <div id="saveBox">
+        <div>
+          <b>歌曲名称</b> <input type="text" id="title" /><b>艺术家</b>
+          <input type="text" id="artist" />
+        </div>
+        <div>
+          <b>专辑名称</b> <input type="text" id="album" /><b
+            >年&nbsp;&nbsp;&nbsp;&nbsp;代</b
+          >
+          <input type="text" id="year" />
+        </div>
+        <div>
+          <b>歌曲照片</b
+          ><img
+            id="image_url"
+            src="https://img2.baidu.com/it/u=3392420875,1412947139&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1682182800&t=556df779a978ab1916f00fbaf4525bb6"
+          />
+          <b>歌曲类型</b><input type="text" id="genre" />
+        </div>
+        <div id="btnBox">
+          <button id="saveBtn">保存</button><button id="celBtn">取消</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="api.js"></script>
+  <script>
+    let data;
+    let page = 1;
+    let pagelimit = 10;
+    let saveNum = 0;
+    let updId = 0;
+    let pageSum = 0;
+    $(document).ready(function () {
+      //页面加载时判断上次的是什么主题
+      let bkColor = localStorage.getItem("background");
+      $("#selectBackground").val(bkColor);
+      if ($("#selectBackground").val() == 0) {
+        $("#selectBackground").css({ background: "white", color: "#333" });
+        $("#svgMoon").css("display", "none");
+        $("#svgSun").css("display", "block");
+        $("#box").css("background", "white");
+        $("#searchInput ").css("background", "white");
+      } else {
+        $("#selectBackground").css({ background: "#333", color: "white" });
+        $("#svgMoon").css("display", "block");
+        $("#svgSun").css("display", "none");
+        $("#box").css("background", "#efe9e9");
+        $("#searchInput ").css("background", "#efe9e9");
+      }
+      //页面加载时回复上次没添加完的数据
+      if (localStorage.getItem("saveData") != null) {
+        $("#saveBox input[id='title']").val(
+          JSON.parse(localStorage.getItem("saveData"))[0].title
+        );
+        $("#saveBox input[id='artist']").val(
+          JSON.parse(localStorage.getItem("saveData"))[0].artist
+        );
+        $("#saveBox input[id='album']").val(
+          JSON.parse(localStorage.getItem("saveData"))[0].album
+        );
+        $("#saveBox input[id='year']").val(
+          JSON.parse(localStorage.getItem("saveData"))[0].year
+        );
+        $("#saveBox input[id='genre']").val(
+          JSON.parse(localStorage.getItem("saveData"))[0].genre
+        );
+      }
+      data = getList(page, pagelimit).data;
+      showList(data);
+      pageLimit();
+    });
+    //表单验证
+    $("#title").blur(function () {
+      if ($(this).val() == "") {
+        alert("请填写正确信息");
+      }
+    });
+    $("#artist").blur(function () {
+      if ($(this).val() == "") {
+        alert("请填写正确信息");
+      }
+    });
+    $("#album").blur(function () {
+      if ($(this).val() == "") {
+        alert("请填写正确信息");
+      }
+    });
+    let yearReg = /^\d{4}$/;
+    $("#year").blur(function () {
+      if ($(this).val() == "") {
+        alert("请填写正确信息");
+      }
+    });
+    $("#genre").blur(function () {
+      if ($(this).val() == "") {
+        alert("请填写正确信息");
+      }
+    });
+    //当添加时,页面关闭,下次打开仍保留数据
+    $("#saveBox input").change(function () {
+      let saveData = [
+        {
+          title: $("#title").val(),
+          artist: $("#artist").val(),
+          album: $("#album").val(),
+          year: $("#year").val(),
+          genre: $("#genre").val(),
+        },
+      ];
+      localStorage.setItem("saveData", JSON.stringify(saveData));
+    });
+    //全选
+    $("#checkAll").click(function () {
+      if ($("#checkAll").prop("checked") == true) {
+        for (const item of $('tbody input[type="checkbox"]')) {
+          $(item).prop("checked", true);
+        }
+      } else {
+        for (const item2 of $('tbody input[type="checkbox"]')) {
+          $(item2).prop("checked", false);
+        }
+      }
+    });
+    //批量删除
+    $("#del").click(function () {
+      let delFlag = confirm("确认删除吗?");
+      if (delFlag == true) {
+        let ids = [];
+        for (const item of $('tbody input[type="checkbox"]')) {
+          if ($(item).prop("checked")) {
+            ids.push($(item).attr("delAllId"));
+          }
+        }
+        for (const id of ids) {
+          del(id);
+        }
+      }
+      data = getList(page, pagelimit).data;
+      showList(data);
+    });
+    //渲染列表
+    function showList(res = data) {
+      let html = "";
+      $(res).each((index, item) => {
+        html += `<tr>
+                    <td><input type="checkbox" delAllId = '${item.id}'/></td>
+                    <td>${item.id}</td>
+                    <td><img src="${item.image_url}" /></td>
+                    <td>${item.title}</td>
+                    <td>${item.artist}</td>
+                    <td>${item.album}</td>
+                    <td>${item.year}</td>
+                    <td>${item.genre}</td>
+                    <td>
+                        <button class="updBtn" updIndex = '${index}' updId = '${item.id}'>编辑</button>
+                        <button class="delBtn" delId = '${item.id}'>删除</button>
+                    </td>
+                  </tr>`;
+      });
+      $("tbody").html(html);
+    }
+    //换主题
+    $("#selectBackground").change(function () {
+      if ($(this).val() == 0) {
+        $("#selectBackground").css({ background: "white", color: "#333" });
+        $("#svgMoon").css("display", "none");
+        $("#svgSun").css("display", "block");
+        $("#box").css("background", "white");
+        $("#searchInput ").css("background", "white");
+        localStorage.setItem("background", "0");
+      } else {
+        $("#selectBackground").css({ background: "#333", color: "white" });
+        $("#svgMoon").css("display", "block");
+        $("#svgSun").css("display", "none");
+        $("#box").css("background", "#efe9e9");
+        $("#searchInput ").css("background", "#efe9e9");
+        localStorage.setItem("background", "1");
+      }
+    });
+    //点击增加按钮
+    $("#add").click(function () {
+      saveNum = 0;
+      $("#saveBox").css("display", "block");
+    });
+    //点击保存按钮
+    $("#saveBtn").click(function () {
+      if (saveNum == 0) {
+        //添加
+        let data = {
+          title: $("#title").val(),
+          artist: $("#artist").val(),
+          album: $("#album").val(),
+          year: $("#year").val(),
+          genre: $("#genre").val(),
+        };
+        add(JSON.stringify(data));
+      } else {
+        //修改
+        let data = {
+          id: updId,
+          title: $("#title").val(),
+          artist: $("#artist").val(),
+          album: $("#album").val(),
+          year: $("#year").val(),
+          genre: $("#genre").val(),
+        };
+        if (
+          JSON.parse(localStorage.getItem("localData"))[0].title ==
+            data.title &&
+          JSON.parse(localStorage.getItem("localData"))[0].artist ==
+            data.artist &&
+          JSON.parse(localStorage.getItem("localData"))[0].album ==
+            data.album &&
+          JSON.parse(localStorage.getItem("localData"))[0].year == data.year &&
+          JSON.parse(localStorage.getItem("localData"))[0].genre == data.genre
+        ) {
+          alert("未修改任何数据");
+        } else {
+          upd(data);
+          data = getList(page, pagelimit).data;
+          showList(data);
+        }
+      }
+      $("#saveBox").css("display", "none");
+      $("#title").val("");
+      $("#artist").val("");
+      $("#album").val("");
+      $("#year").val("");
+      $("#genre").val("");
+      // localStorage.setItem("saveData",);
+    });
+    //点击取消按钮
+    $("#celBtn").click(function () {
+      $("#saveBox").css("display", "none");
+      $("#title").val("");
+      $("#artist").val("");
+      $("#album").val("");
+      $("#year").val("");
+      $("#genre").val("");
+    });
+    //点击查找
+    let searchData = [];
+    $("#searchBtn").click(function () {
+      $(data).each((index, item) => {
+        if (item.title.includes($("#searchInput").val())) {
+          searchData.push(item);
+        }
+      });
+      //判断按钮数量
+      // if (searchData.length != 0) {
+      //   console.log(searchData.length);
+      //   console.log(111);
+      //   pageSum = Math.ceil(searchData.length / pagelimit);
+      // } else {
+      //   console.log(222);
+      //   pageAll = getList(page, pagelimit).count;
+      //   pageSum = Math.ceil(pageAll / pagelimit);
+      // }
+      // let num = 1;
+      // let limithtml = "";
+      // function limit() {
+      //   if (pageSum != undefined && num != pageSum) {
+      //     limithtml += `<button class='limitBtn' onclick='limitPage(${num})'> ${num}</button>`;
+      //     num++;
+      //     limit();
+      //   } else {
+      //     limithtml += `<button class='limitBtn' onclick='limitPage(${num})'> ${num}</button>`;
+      //     return;
+      //   }
+      // }
+      // limit();
+      // $("#limitBox").html(limithtml);
+      showList(searchData);
+      searchData = [];
+    });
+    //点击修改
+    $("tbody").on("click", 'button[class="updBtn"]', function () {
+      saveNum = 1;
+      $("#saveBox").css("display", "block");
+      updId = $(this).attr("updId");
+      //回显数据
+      let index = $(this).attr("updIndex");
+      $("#title").val(data[index].title);
+      $("#artist").val(data[index].artist);
+      $("#album").val(data[index].album);
+      $("#year").val(data[index].year);
+      $("#genre").val(data[index].genre);
+      //本地存储
+      let localData = [
+        {
+          title: data[index].title,
+          artist: data[index].artist,
+          album: data[index].album,
+          year: data[index].year,
+          genre: data[index].genre,
+        },
+      ];
+      localStorage.setItem("localData", JSON.stringify(localData));
+    });
+    //点击删除
+    $("tbody").on("click", 'button[class="delBtn"]', function () {
+      let delFlag = confirm("确认删除吗?");
+      if (delFlag == true) {
+        del($(this).attr("delId"));
+        data = getList(page, pagelimit).data;
+        showList(data);
+      }
+    });
+    //分页
+    function pageLimit() {
+      pageAll = getList(page, pagelimit).count;
+      pageSum = Math.ceil(pageAll / pagelimit);
+      let num = 1;
+      let limithtml = "";
+      //判断按钮数量
+      function limit() {
+        if (pageSum != undefined && num != pageSum) {
+          limithtml += `<button class='limitBtn' onclick='limitPage(${num})'> ${num}</button>`;
+          num++;
+          limit();
+        } else {
+          limithtml += `<button class='limitBtn' onclick='limitPage(${num})'> ${num}</button>`;
+          return;
+        }
+      }
+      limit();
+      $("#limitBox").html(limithtml);
+    }
+    //点击分页按钮
+    let limitNum = 0;
+    function limitPage(a) {
+      page = a;
+      data = getList(page, pagelimit).data;
+      showList(data);
+    }
+  </script>
+</html>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+</style>

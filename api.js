@@ -3,7 +3,7 @@ function getList(page, pagelimit) {
     let res;
     $.ajax({
         type: "GET",
-        url: "http://81.68.107.245/api/songs?page=" + page + "&pageSize=" + pagelimit,
+        url: "https://81.68.107.245/api/songs?page=" + page + "&pageSize=" + pagelimit,
         async: false,
         dataType: "json",
         success: function (data) {
@@ -17,7 +17,7 @@ function getListById(id) {
     let searchData;
     $.ajax({
         type: "GET",
-        url: "http://81.68.107.245/api/songs/" + id,
+        url: "https://81.68.107.245/api/songs/" + id,
         dataType: "json",
         async: false,
         success: function (res) {
@@ -30,7 +30,7 @@ function getListById(id) {
 function del(id) {
     $.ajax({
         type: "DELETE",
-        url: "http://81.68.107.245/api/songs/" + id,
+        url: "https://81.68.107.245/api/songs/" + id,
         dataType: "json",
         async: false,
         success: function (res) {
@@ -41,7 +41,7 @@ function del(id) {
 function add(res) {
     $.ajax({
         type: "POST",
-        url: "http://81.68.107.245/api/songs",
+        url: "https://81.68.107.245/api/songs",
         dataType: "json",
         async: false,
         data: res,
@@ -64,7 +64,7 @@ function upd(res) {
     };
     $.ajax({
         type: "PUT",
-        url: "http://81.68.107.245/api/songs/" + res.id,
+        url: "https://81.68.107.245/api/songs/" + res.id,
         dataType: "json",
         async: false,
         data: JSON.stringify(data),
